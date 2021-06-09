@@ -1,9 +1,6 @@
-﻿using Tandem.Model.Enum;
-
-namespace Tandem.Model
+﻿namespace Tandem.Model
 {
-  public class Book : Product
+  public class Book : PhysicalProduct
   {
-    public override EnumProductType ProductType => EnumProductType.Physical;
   }
 }

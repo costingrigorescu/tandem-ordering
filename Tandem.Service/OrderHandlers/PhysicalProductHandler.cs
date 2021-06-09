@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Tandem.Model;
-using Tandem.Model.Enum;
 using Tandem.Service.Services;
 
 namespace Tandem.Service.OrderHandlers
@@ -32,9 +31,9 @@ namespace Tandem.Service.OrderHandlers
 
     public override async Task HandleAsync(Order order, CancellationToken ct)
     {
-      if (Enabled && order.Products.Any(x => x.ProductType == EnumProductType.Physical))
+      if (Enabled && order.Products.Any(x => x is PhysicalProduct))
       {
-        foreach (var product in order.Products.Where(x => x.ProductType == EnumProductType.Physical))
+        foreach (var product in order.Products.Where(x => x is PhysicalProduct).Cast<PhysicalProduct>())
         {
           try
           {

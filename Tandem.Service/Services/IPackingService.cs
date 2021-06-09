@@ -6,7 +6,7 @@ namespace Tandem.Service.Services
 {
   public interface IPackingService
   {
-    Task GenerateShippingPackingSlipAsync(Product product, CancellationToken ct);
+    Task GenerateShippingPackingSlipAsync(PhysicalProduct product, CancellationToken ct);
     Task GenerateRoyaltyPackingSlipAsync(Book book, CancellationToken ct);
   }
 }

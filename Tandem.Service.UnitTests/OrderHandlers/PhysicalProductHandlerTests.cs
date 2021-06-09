@@ -3,7 +3,6 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Tandem.Model;
@@ -110,7 +109,7 @@ namespace Tandem.Service.UnitTests.OrderHandlers
       await _handler.HandleAsync(order, CancellationToken.None);
 
       // Assert
-      _mockPackagingService.Verify(m => m.GenerateShippingPackingSlipAsync(It.IsAny<Product>(), CancellationToken.None), Times.Never());
+      _mockPackagingService.Verify(m => m.GenerateShippingPackingSlipAsync(It.IsAny<PhysicalProduct>(), CancellationToken.None), Times.Never());
     }
 
     [Test]
@@ -138,7 +137,7 @@ namespace Tandem.Service.UnitTests.OrderHandlers
       await _handler.HandleAsync(order, CancellationToken.None);
 
       // Assert
-      _mockPackagingService.Verify(m => m.GenerateShippingPackingSlipAsync(It.IsAny<Product>(), CancellationToken.None), Times.Never());
+      _mockPackagingService.Verify(m => m.GenerateShippingPackingSlipAsync(It.IsAny<PhysicalProduct>(), CancellationToken.None), Times.Never());
     }
 
     [Test]
@@ -175,14 +174,14 @@ namespace Tandem.Service.UnitTests.OrderHandlers
       _mockPackagingService.Verify(
         m =>
           m.GenerateShippingPackingSlipAsync(
-            It.IsAny<Product>(),
+            It.IsAny<PhysicalProduct>(),
             CancellationToken.None),
         Times.Exactly(2));
 
       _mockPackagingService.Verify(
         m =>
           m.GenerateShippingPackingSlipAsync(
-            It.Is<Product>(
+            It.Is<PhysicalProduct>(
               x =>
                 x is Newspaper &&
                 x.Id == order.Products[0].Id),
@@ -192,7 +191,7 @@ namespace Tandem.Service.UnitTests.OrderHandlers
       _mockPackagingService.Verify(
         m =>
           m.GenerateShippingPackingSlipAsync(
-            It.Is<Product>(
+            It.Is<PhysicalProduct>(
               x =>
                 x is Book &&
                 x.Id == order.Products[2].Id),
